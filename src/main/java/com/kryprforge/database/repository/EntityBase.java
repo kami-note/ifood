@@ -8,11 +8,9 @@ public abstract class EntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public static final int STATUS_ACTIVE = 1;
-    public static final int STATUS_INACTIVE = 0;
-    public static final int STATUS_DELETED = -1;
-
-    private int status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status;
 
     public Long getId() {
         return id;
@@ -22,23 +20,23 @@ public abstract class EntityBase {
         this.id = id;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
     public boolean isActive() {
-        return status == STATUS_ACTIVE;
+        return status == Status.ACTIVE;
     }
 
     public boolean isInactive() {
-        return status == STATUS_INACTIVE;
+        return status == Status.INACTIVE;
     }
 
     public boolean isDeleted() {
-        return status == STATUS_DELETED;
+        return status == Status.DELETED;
     }
 }

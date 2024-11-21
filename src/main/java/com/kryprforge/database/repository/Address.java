@@ -27,8 +27,11 @@ public class Address extends EntityBase {
     @Column(name = "address_type", nullable = false)
     private String addressType;
 
-    public Address() {}
+    public Address() {
+        this.setStatus(Status.ACTIVE);
+    }
 
+    // Constructor com parâmetros
     public Address(String street, String number, String neighborhood, String city, String state, String postalCode, String addressType) {
         this.street = street;
         this.number = number;
@@ -37,8 +40,10 @@ public class Address extends EntityBase {
         this.state = state;
         this.postalCode = postalCode;
         this.addressType = addressType;
+        this.setStatus(Status.ACTIVE);
     }
 
+    // Getters e setters
     public String getStreet() {
         return street;
     }
