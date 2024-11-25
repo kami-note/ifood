@@ -31,7 +31,6 @@ public class Address extends EntityBase {
         this.setStatus(Status.ACTIVE);
     }
 
-    // Constructor com parâmetros
     public Address(String street, String number, String neighborhood, String city, String state, String postalCode, String addressType) {
         this.street = street;
         this.number = number;

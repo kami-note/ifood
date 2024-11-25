@@ -1,40 +1,49 @@
 package com.kryprforge.database.dao;
 
-import com.kryprforge.database.repository.Address;
+import com.kryprforge.database.repository.Promotion;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 
-public class AddressDAO {
+public class PromotionDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("defaultPU");
 
-    public void save(Address address) {
+    public void save(Promotion promotion) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(address);
+            em.persist(promotion);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public List<Address> findAll() {
+    public Promotion findById(Long id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Address a", Address.class).getResultList();
+            return em.find(Promotion.class, id);
         } finally {
             em.close();
         }
     }
 
-    public void update(Address address) {
+    public List<Promotion> findAll() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery("SELECT p FROM Promotion p", Promotion.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void update(Promotion promotion) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(address);
+            em.merge(promotion);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -45,9 +54,9 @@ public class AddressDAO {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            Address address = em.find(Address.class, id);
-            if (address != null) {
-                em.remove(address);
+            Promotion promotion = em.find(Promotion.class, id);
+            if (promotion != null) {
+                em.remove(promotion);
             }
             em.getTransaction().commit();
         } finally {

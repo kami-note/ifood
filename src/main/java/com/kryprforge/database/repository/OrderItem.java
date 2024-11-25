@@ -16,5 +16,5 @@ public class OrderItem extends EntityBase {
     @Column(name = "quantity")
     private int quantity;
 
-    // Getters and Setters
+    // Getters e Setters
 }

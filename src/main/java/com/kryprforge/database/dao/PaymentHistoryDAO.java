@@ -1,40 +1,49 @@
 package com.kryprforge.database.dao;
 
-import com.kryprforge.database.repository.Address;
+import com.kryprforge.database.repository.PaymentHistory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 
-public class AddressDAO {
+public class PaymentHistoryDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("defaultPU");
 
-    public void save(Address address) {
+    public void save(PaymentHistory paymentHistory) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(address);
+            em.persist(paymentHistory);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public List<Address> findAll() {
+    public PaymentHistory findById(Long id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Address a", Address.class).getResultList();
+            return em.find(PaymentHistory.class, id);
         } finally {
             em.close();
         }
     }
 
-    public void update(Address address) {
+    public List<PaymentHistory> findAll() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery("SELECT ph FROM PaymentHistory ph", PaymentHistory.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void update(PaymentHistory paymentHistory) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(address);
+            em.merge(paymentHistory);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -45,9 +54,9 @@ public class AddressDAO {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            Address address = em.find(Address.class, id);
-            if (address != null) {
-                em.remove(address);
+            PaymentHistory paymentHistory = em.find(PaymentHistory.class, id);
+            if (paymentHistory != null) {
+                em.remove(paymentHistory);
             }
             em.getTransaction().commit();
         } finally {

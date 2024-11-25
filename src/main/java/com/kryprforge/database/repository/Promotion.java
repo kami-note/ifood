@@ -17,5 +17,13 @@ public class Promotion extends EntityBase {
     @Column(name = "validity")
     private String validity;
 
+    public Promotion(String name, double discountValue, String code, String validity) {
+        this.name = name;
+        this.discountValue = discountValue;
+        this.code = code;
+        this.validity = validity;
+        this.setStatus(Status.ACTIVE);
+    }
+
     // Getters and Setters
 }

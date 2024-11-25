@@ -10,4 +10,6 @@ public abstract class OrderBase extends EntityBase {
 
     @Column(name = "total_amount")
     private double totalAmount;
+
+    // Getters e Setters
 }

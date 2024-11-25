@@ -1,40 +1,49 @@
 package com.kryprforge.database.dao;
 
-import com.kryprforge.database.repository.Address;
+import com.kryprforge.database.repository.ProductAccompaniment;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 
-public class AddressDAO {
+public class ProductAccompanimentDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("defaultPU");
 
-    public void save(Address address) {
+    public void save(ProductAccompaniment productAccompaniment) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(address);
+            em.persist(productAccompaniment);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public List<Address> findAll() {
+    public ProductAccompaniment findById(Long id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Address a", Address.class).getResultList();
+            return em.find(ProductAccompaniment.class, id);
         } finally {
             em.close();
         }
     }
 
-    public void update(Address address) {
+    public List<ProductAccompaniment> findAll() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery("SELECT pa FROM ProductAccompaniment pa", ProductAccompaniment.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void update(ProductAccompaniment productAccompaniment) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(address);
+            em.merge(productAccompaniment);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -45,9 +54,9 @@ public class AddressDAO {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            Address address = em.find(Address.class, id);
-            if (address != null) {
-                em.remove(address);
+            ProductAccompaniment productAccompaniment = em.find(ProductAccompaniment.class, id);
+            if (productAccompaniment != null) {
+                em.remove(productAccompaniment);
             }
             em.getTransaction().commit();
         } finally {

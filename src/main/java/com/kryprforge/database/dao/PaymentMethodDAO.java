@@ -1,40 +1,49 @@
 package com.kryprforge.database.dao;
 
-import com.kryprforge.database.repository.Address;
+import com.kryprforge.database.repository.PaymentMethod;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 
-public class AddressDAO {
+public class PaymentMethodDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("defaultPU");
 
-    public void save(Address address) {
+    public void save(PaymentMethod paymentMethod) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(address);
+            em.persist(paymentMethod);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public List<Address> findAll() {
+    public PaymentMethod findById(Long id) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Address a", Address.class).getResultList();
+            return em.find(PaymentMethod.class, id);
         } finally {
             em.close();
         }
     }
 
-    public void update(Address address) {
+    public List<PaymentMethod> findAll() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery("SELECT pm FROM PaymentMethod pm", PaymentMethod.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void update(PaymentMethod paymentMethod) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(address);
+            em.merge(paymentMethod);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -45,9 +54,9 @@ public class AddressDAO {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
-            Address address = em.find(Address.class, id);
-            if (address != null) {
-                em.remove(address);
+            PaymentMethod paymentMethod = em.find(PaymentMethod.class, id);
+            if (paymentMethod != null) {
+                em.remove(paymentMethod);
             }
             em.getTransaction().commit();
         } finally {

@@ -8,5 +8,8 @@ public class PaymentMethod extends EntityBase {
     @Column(name = "payment_type")
     private String paymentType;
 
-    // Getters and Setters
+    public PaymentMethod(String paymentType) {
+        this.paymentType = paymentType;
+        this.setStatus(Status.ACTIVE);
+    }
 }
