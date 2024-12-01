@@ -29,4 +29,36 @@ public class Restaurant extends EntityBase {
         this.hasPickupOption = hasPickupOption;
         setStatus(Status.ACTIVE);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public boolean isHasPickupOption() {
+        return hasPickupOption;
+    }
+
+    public void setHasPickupOption(boolean hasPickupOption) {
+        this.hasPickupOption = hasPickupOption;
+    }
 }

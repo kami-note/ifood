@@ -13,6 +13,4 @@ public class CustomerOrder extends OrderBase {
 
     @Column(name = "notes")
     private String notes;
-
-    // Getters e Setters
 }

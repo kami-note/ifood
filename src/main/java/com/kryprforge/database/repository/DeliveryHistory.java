@@ -16,6 +16,4 @@ public class DeliveryHistory extends EntityBase {
 
     @Column(name = "date")
     private Date date;
-
-    // Getters and Setters
 }

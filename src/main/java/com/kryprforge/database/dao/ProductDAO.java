@@ -39,6 +39,20 @@ public class ProductDAO {
         }
     }
 
+    public List<Product> findByRestaurantId(Long restaurantId) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT p FROM Product p WHERE p.restaurant.id = :restaurantId",
+                            Product.class
+                    )
+                    .setParameter("restaurantId", restaurantId)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public void update(Product product) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {

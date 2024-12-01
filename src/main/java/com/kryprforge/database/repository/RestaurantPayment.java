@@ -12,6 +12,4 @@ public class RestaurantPayment extends EntityBase {
     @ManyToOne
     @JoinColumn(name = "payment_method_id", referencedColumnName = "id")
     private PaymentMethod paymentMethod;
-
-    // Getters and Setters
 }

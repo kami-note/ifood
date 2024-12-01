@@ -13,5 +13,4 @@ public class OrderProductAccompaniment extends EntityBase {
     @JoinColumn(name = "accompaniment_id", referencedColumnName = "id")
     private Accompaniment accompaniment;
 
-    // Getters and Setters
 }

@@ -19,6 +19,4 @@ public class PaymentHistory extends EntityBase {
 
     @Column(name = "amount")
     private double amount;
-
-    // Getters and Setters
 }

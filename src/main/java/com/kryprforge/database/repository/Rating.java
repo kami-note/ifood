@@ -15,6 +15,4 @@ public class Rating extends EntityBase {
     @ManyToOne
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurant restaurant;
-
-    // Getters and Setters
 }

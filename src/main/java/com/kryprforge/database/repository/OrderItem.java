@@ -16,5 +16,27 @@ public class OrderItem extends EntityBase {
     @Column(name = "quantity")
     private int quantity;
 
-    // Getters e Setters
+    public CustomerOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(CustomerOrder order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

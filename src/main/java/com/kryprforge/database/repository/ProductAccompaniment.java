@@ -12,6 +12,4 @@ public class ProductAccompaniment extends EntityBase {
     @ManyToOne
     @JoinColumn(name = "accompaniment_id", referencedColumnName = "id")
     private Accompaniment accompaniment;
-
-    // Getters and Setters
 }
