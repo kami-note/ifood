@@ -5,7 +5,7 @@ import java.util.List;
 public class Table {
     private final List<String[]> rows;
     private final String[] headers;
-    private int[] columnWidths;
+    private final int[] columnWidths;
 
     public Table(String[] headers, List<String[]> rows) {
         this.headers = headers;
@@ -22,7 +22,8 @@ public class Table {
 
         for (String[] row : rows) {
             for (int i = 0; i < row.length; i++) {
-                widths[i] = Math.max(widths[i], row[i].length());
+                String cellValue = row[i] != null ? row[i] : "N/A";
+                widths[i] = Math.max(widths[i], cellValue.length());
             }
         }
 
@@ -44,10 +45,11 @@ public class Table {
     private void printRow(String[] row, boolean isHeader) {
         StringBuilder line = new StringBuilder("│");
         for (int i = 0; i < row.length; i++) {
+            String cellValue = row[i] != null ? row[i] : "N/A";
             if (isHeader) {
-                line.append(centerText(row[i], columnWidths[i])).append("│");
+                line.append(centerText(cellValue, columnWidths[i])).append("│");
             } else {
-                line.append(leftAlignText(row[i], columnWidths[i])).append("│");
+                line.append(leftAlignText(cellValue, columnWidths[i])).append("│");
             }
         }
         System.out.println(line);

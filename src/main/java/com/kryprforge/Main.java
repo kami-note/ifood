@@ -1,7 +1,7 @@
 package com.kryprforge;
 
-import com.kryprforge.database.dao.*;
-import com.kryprforge.database.service.AddressService;
+import com.kryprforge.dao.*;
+import com.kryprforge.service.AddressService;
 import com.kryprforge.ui.ScreenManager;
 
 public class Main {
@@ -13,8 +13,19 @@ public class Main {
         RestaurantDAO restaurantDAO = new RestaurantDAO();
         ProductDAO productDAO = new ProductDAO();
         AddressService addressService = new AddressService(addressDAO);
+        AccompanimentDAO accompanimentDAO = new AccompanimentDAO();
+        ProductAccompanimentDAO productAccompanimentDAO = new ProductAccompanimentDAO();
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
 
-        ScreenManager screenManager = new ScreenManager(addressDAO, paymentMethodDAO, promotionDAO, categoryDAO, restaurantDAO, productDAO, addressService);
-        screenManager.run();
+        ScreenManager screenManager = new ScreenManager(
+                restaurantDAO,
+                productDAO,
+                addressDAO,
+                paymentMethodDAO,
+                orderItemDAO,
+                accompanimentDAO,
+                addressService
+        );
+        screenManager.start();
     }
 }
