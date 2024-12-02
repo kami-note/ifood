@@ -1,4 +1,4 @@
-package com.kryprforge.ui;
+package com.kryprforge.ui.utils;
 
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;

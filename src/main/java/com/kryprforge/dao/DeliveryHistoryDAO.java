@@ -1,6 +1,8 @@
 package com.kryprforge.dao;
 
+import com.kryprforge.models.CustomerOrder;
 import com.kryprforge.models.DeliveryHistory;
+import com.kryprforge.models.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -59,6 +61,17 @@ public class DeliveryHistoryDAO {
                 em.remove(deliveryHistory);
             }
             em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<DeliveryHistory> findByOrder(CustomerOrder order) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            return em.createQuery("SELECT dh FROM DeliveryHistory dh WHERE dh.order = :order", DeliveryHistory.class)
+                    .setParameter("order", order)
+                    .getResultList();
         } finally {
             em.close();
         }

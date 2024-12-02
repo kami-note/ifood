@@ -3,6 +3,7 @@ package com.kryprforge.ui;
 import com.kryprforge.context.GlobalInfos;
 import com.kryprforge.dao.*;
 import com.kryprforge.service.AddressService;
+import com.kryprforge.service.OrderService;
 import com.kryprforge.ui.screens.*;
 
 import java.util.Scanner;
@@ -18,16 +19,20 @@ public class ScreenManager {
     private final AccompanimentDAO accompanimentDAO;
 
     private final AddressService addressService;
+    private final OrderService orderService;
 
     private boolean running = true;
     private final Scanner scanner;
 
     public ScreenManager(RestaurantDAO restaurantDAO, ProductDAO productDAO,
                          AddressDAO addressDAO, PaymentMethodDAO paymentMethodDAO,
-                         OrderItemDAO orderItemDAO, AccompanimentDAO accompanimentDAO, AddressService addressService) {
+                         OrderItemDAO orderItemDAO, AccompanimentDAO accompanimentDAO,
+                         AddressService addressService, OrderService orderService,
+                         GlobalInfos globalInfos) {
         this.accompanimentDAO = accompanimentDAO;
         this.addressService = addressService;
-        this.globalInfos = new GlobalInfos();
+        this.orderService = orderService;
+        this.globalInfos = globalInfos;
         this.restaurantDAO = restaurantDAO;
         this.productDAO = productDAO;
         this.addressDAO = addressDAO;
@@ -71,11 +76,18 @@ public class ScreenManager {
         accompanimentScreen.render();
 
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen(productDAO, accompanimentDAO, globalInfos);
-        orderSummaryScreen.render();
+
+        if (!orderSummaryScreen.render()){
+            globalInfos.resetOrder();
+            return;
+        }
 
         AddressScreen addressScreen = new AddressScreen(addressService, addressDAO, globalInfos);
-        addressScreen.render();
 
+        if(!addressScreen.render()){
+            globalInfos.resetOrder();
+            return;
+        }
         PaymentMethodScreen paymentMethodScreen = new PaymentMethodScreen(paymentMethodDAO, globalInfos);
         paymentMethodScreen.render();
 
@@ -83,14 +95,10 @@ public class ScreenManager {
     }
 
     private void displayPastOrders() {
-       /* PastOrdersScreen pastOrdersScreen = new PastOrdersScreen(orderItemDAO);
-        pastOrdersScreen.render();*/
     }
 
-    private void finalizeOrder() {/*
-        OrderService orderService = new OrderService(orderItemDAO);
-        orderService.createOrder(globalInfos);*/
-        globalInfos.resetOrder();
+    private void finalizeOrder() {
+        orderService.insertOrder();
         System.out.println("Pedido finalizado com sucesso!");
     }
 

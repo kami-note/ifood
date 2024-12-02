@@ -1,6 +1,6 @@
 package com.kryprforge.ui.components;
 
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import org.fusesource.jansi.Ansi;
 
 public class Header {

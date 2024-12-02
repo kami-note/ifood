@@ -3,7 +3,7 @@ package com.kryprforge.ui.screens;
 import com.kryprforge.dao.AccompanimentDAO;
 import com.kryprforge.models.Accompaniment;
 import com.kryprforge.ui.components.Header;
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import com.kryprforge.dao.ProductDAO;
 import com.kryprforge.models.Product;
 import com.kryprforge.context.GlobalInfos;
@@ -25,7 +25,7 @@ public class OrderSummaryScreen {
         this.globalInfos = globalInfos;
     }
 
-    public void render() {
+    public boolean render() {
         // Cabeçalho
         Header header = new Header("Resumo do Pedido", 50);
         header.render();
@@ -35,7 +35,7 @@ public class OrderSummaryScreen {
 
         if (selectedProductIds.isEmpty()) {
             System.out.println(CLIUtils.color("Nenhum produto foi adicionado ao pedido.", Ansi.Color.RED));
-            return;
+            return false;
         }
 
         // Obter detalhes dos produtos selecionados
@@ -72,7 +72,6 @@ public class OrderSummaryScreen {
         // Menu de opções
         System.out.println("\n[1] Confirmar Pedido");
         System.out.println("[2] Cancelar Pedido");
-        System.out.println("[0] Voltar ao Menu Principal");
 
         InputField<Integer> menuField = new InputField<>(
                 "Escolha uma opção",
@@ -86,19 +85,18 @@ public class OrderSummaryScreen {
             switch (choice) {
                 case 1 -> {
                     System.out.println(CLIUtils.color("Pedido confirmado! Obrigado por comprar conosco.", Ansi.Color.GREEN));
-                    globalInfos.clearSelectedProducts();
-                    globalInfos.clearSelectedAccompaniments();
                     inSummary = false;
+                    return true;
                 }
                 case 2 -> {
                     System.out.println(CLIUtils.color("Pedido cancelado. Todos os produtos e adicionais foram removidos.", Ansi.Color.RED));
-                    globalInfos.clearSelectedProducts();
-                    globalInfos.clearSelectedAccompaniments();
                     inSummary = false;
+                    return false;
                 }
                 case 0 -> inSummary = false;
                 default -> System.out.println(CLIUtils.color("Escolha inválida!", Ansi.Color.RED));
             }
         }
+        return false;
     }
 }

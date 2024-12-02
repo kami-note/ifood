@@ -3,7 +3,7 @@ package com.kryprforge.ui.screens;
 import com.kryprforge.context.GlobalInfos;
 import com.kryprforge.models.PaymentMethod;
 import com.kryprforge.dao.PaymentMethodDAO;
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import com.kryprforge.ui.components.InputField;
 import com.kryprforge.ui.components.Table;
 import org.fusesource.jansi.Ansi;

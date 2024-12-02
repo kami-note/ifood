@@ -13,4 +13,23 @@ public class OrderProductAccompaniment extends EntityBase {
     @JoinColumn(name = "accompaniment_id", referencedColumnName = "id")
     private Accompaniment accompaniment;
 
+    public OrderProductAccompaniment() {
+        this.setStatus(Status.ACTIVE);
+    }
+
+    public OrderItem getOrderItem() {
+        return orderItem;
+    }
+
+    public void setOrderItem(OrderItem orderItem) {
+        this.orderItem = orderItem;
+    }
+
+    public Accompaniment getAccompaniment() {
+        return accompaniment;
+    }
+
+    public void setAccompaniment(Accompaniment accompaniment) {
+        this.accompaniment = accompaniment;
+    }
 }

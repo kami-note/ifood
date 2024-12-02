@@ -1,7 +1,7 @@
 package com.kryprforge.ui.screens;
 
 import com.kryprforge.ui.components.Header;
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import com.kryprforge.dao.ProductDAO;
 import com.kryprforge.models.Product;
 import com.kryprforge.context.GlobalInfos;

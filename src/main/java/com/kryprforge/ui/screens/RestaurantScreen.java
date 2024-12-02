@@ -3,7 +3,7 @@ package com.kryprforge.ui.screens;
 import com.kryprforge.ui.components.Header;
 import com.kryprforge.ui.components.Table;
 import com.kryprforge.ui.components.InputField;
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import com.kryprforge.dao.RestaurantDAO;
 import com.kryprforge.models.Restaurant;
 import org.fusesource.jansi.Ansi;

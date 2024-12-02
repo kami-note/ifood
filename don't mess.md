@@ -11,6 +11,6 @@
 - [x] Adicionar o número ao endereço
 - [x] Listar formas de pagamento
 - [x] Selecionar forma de pagamento
-- [ ] Finalizar Pedido
+- [x] Finalizar Pedido
 - [ ] Threads para atualizar status do pedido [produção, saiu para entrega, entregue]
 - [ ] Listar meus pedidos já realizados

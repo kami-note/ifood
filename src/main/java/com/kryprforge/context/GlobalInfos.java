@@ -13,7 +13,6 @@ public class GlobalInfos {
     private Long idAddressCurrent;
     private Long paymentMethod;
 
-
     public Long getIdAddressCurrent() {
         return idAddressCurrent;
     }
@@ -63,9 +62,12 @@ public class GlobalInfos {
     }
 
     public void resetOrder() {
+        clearSelectedAccompaniments();
+        clearSelectedProducts();
+
         selectedRestaurantId = null;
-        selectedProducts.clear();
         deliveryAddress = null;
+        idAddressCurrent = null;
         paymentMethod = null;
     }
 

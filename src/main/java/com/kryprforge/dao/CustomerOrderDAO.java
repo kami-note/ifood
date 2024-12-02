@@ -1,6 +1,7 @@
 package com.kryprforge.dao;
 
 import com.kryprforge.models.CustomerOrder;
+import com.kryprforge.models.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -10,12 +11,13 @@ public class CustomerOrderDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("defaultPU");
 
-    public void save(CustomerOrder customerOrder) {
+    public Long save(CustomerOrder customerOrder) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(customerOrder);
             em.getTransaction().commit();
+            return customerOrder.getId();
         } finally {
             em.close();
         }
@@ -63,4 +65,17 @@ public class CustomerOrderDAO {
             em.close();
         }
     }
+
+    public List<CustomerOrder> findAllActiveOrders() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        try {
+            // Query que seleciona os pedidos com status 'ACTIVE'
+            return em.createQuery("SELECT co FROM CustomerOrder co WHERE co.status = :status", CustomerOrder.class)
+                    .setParameter("status", Status.ACTIVE)  // Passando o parâmetro de status 'ACTIVE'
+                    .getResultList();
+        } finally {
+            em.close();  // Garantindo que o EntityManager seja fechado após a operação
+        }
+    }
+
 }

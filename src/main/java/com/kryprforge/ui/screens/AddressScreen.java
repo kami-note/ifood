@@ -6,7 +6,7 @@ import com.kryprforge.service.AddressService;
 import com.kryprforge.dao.AddressDAO;
 import com.kryprforge.ui.components.InputField;
 import com.kryprforge.ui.components.Header;
-import com.kryprforge.ui.CLIUtils;
+import com.kryprforge.ui.utils.CLIUtils;
 import com.kryprforge.ui.components.Table;
 import org.apache.hc.core5.http.ParseException;
 import org.fusesource.jansi.Ansi;
@@ -27,14 +27,14 @@ public class AddressScreen {
         this.globalInfos = globalInfos;
     }
 
-    public void render() {
+    public boolean render() {
         Header header = new Header("Gerenciamento de Endereços", 50);
         header.render();
 
         while (inAddressMenu) {
             System.out.println("[1] Adicionar Endereço");
             System.out.println("[2] Selecionar Endereço");
-            System.out.println("[3] Remover Endereço");
+            //System.out.println("[3] Remover Endereço");
             System.out.println("[0] Voltar ao Menu Principal");
 
             InputField<Integer> menuField = new InputField<>(
@@ -49,10 +49,14 @@ public class AddressScreen {
                 case 1 -> addAddress();
                 case 2 -> selectAddress();
                 case 3 -> deleteAddress();
-                case 0 -> inAddressMenu = false;
+                case 0 -> {
+                    return false;
+                }
                 default -> System.out.println(CLIUtils.color("Opção inválida! Tente novamente.", Ansi.Color.RED));
             }
         }
+
+        return false;
     }
 
     // Função auxiliar para listar endereços e exibir a tabela
