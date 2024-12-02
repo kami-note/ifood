@@ -56,7 +56,9 @@ public class ScreenManager {
         int choice = getUserChoice();
         switch (choice) {
             case 1 -> handleNewOrder();
-            case 2 -> displayPastOrders();
+            case 2 -> {
+                /*Todo*/
+            }
             case 3 -> running = false;
             default -> System.out.println("Opção inválida!");
         }
@@ -92,9 +94,6 @@ public class ScreenManager {
         paymentMethodScreen.render();
 
         finalizeOrder();
-    }
-
-    private void displayPastOrders() {
     }
 
     private void finalizeOrder() {

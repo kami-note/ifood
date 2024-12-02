@@ -19,7 +19,6 @@ public class ProductScreen {
         this.globalInfos = globalInfos;
     }
 
-    // Modificar a exibição e adicionar lógica para capturar a seleção
     public void render() {
         Header header = new Header("Seleção de Produtos", 50);
         header.render();

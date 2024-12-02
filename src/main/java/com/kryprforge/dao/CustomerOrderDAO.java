@@ -69,12 +69,11 @@ public class CustomerOrderDAO {
     public List<CustomerOrder> findAllActiveOrders() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         try {
-            // Query que seleciona os pedidos com status 'ACTIVE'
             return em.createQuery("SELECT co FROM CustomerOrder co WHERE co.status = :status", CustomerOrder.class)
-                    .setParameter("status", Status.ACTIVE)  // Passando o parâmetro de status 'ACTIVE'
+                    .setParameter("status", Status.ACTIVE)
                     .getResultList();
         } finally {
-            em.close();  // Garantindo que o EntityManager seja fechado após a operação
+            em.close();
         }
     }
 

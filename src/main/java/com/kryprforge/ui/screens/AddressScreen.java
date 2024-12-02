@@ -34,7 +34,6 @@ public class AddressScreen {
         while (inAddressMenu) {
             System.out.println("[1] Adicionar Endereço");
             System.out.println("[2] Selecionar Endereço");
-            //System.out.println("[3] Remover Endereço");
             System.out.println("[0] Voltar ao Menu Principal");
 
             InputField<Integer> menuField = new InputField<>(
@@ -59,7 +58,6 @@ public class AddressScreen {
         return false;
     }
 
-    // Função auxiliar para listar endereços e exibir a tabela
     private void listAndDisplayAddresses() {
         List<Address> addresses = addressDAO.findAll();
 

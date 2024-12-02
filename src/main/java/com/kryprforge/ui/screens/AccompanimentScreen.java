@@ -20,11 +20,9 @@ public class AccompanimentScreen {
     }
 
     public void render() {
-        // Cabeçalho
         Header header = new Header("Acompanhamentos", 50);
         header.render();
 
-        // Recuperar acompanhamentos
         List<Accompaniment> accompaniments = accompanimentDAO.findAll();
 
         if (accompaniments.isEmpty()) {
@@ -34,20 +32,18 @@ public class AccompanimentScreen {
 
         boolean adding = true;
         while (adding) {
-            // Exibir lista de acompanhamentos
             for (int i = 0; i < accompaniments.size(); i++) {
                 Accompaniment accompaniment = accompaniments.get(i);
                 System.out.printf("[%d] %s - $%.2f%n", i + 1, accompaniment.getName(), accompaniment.getPrice());
             }
             System.out.println("[0] Finalizar seleção de acompanhamentos");
 
-            // Capturar escolha do usuário
             System.out.print(CLIUtils.color("Escolha um acompanhamento para detalhes ou [0] para finalizar: ", Ansi.Color.GREEN));
             try {
                 int choice = Integer.parseInt(System.console().readLine());
 
                 if (choice == 0) {
-                    adding = false; // Finalizar seleção
+                    adding = false;
                 } else if (choice > 0 && choice <= accompaniments.size()) {
                     Accompaniment selectedAccompaniment = accompaniments.get(choice - 1);
                     globalInfos.addAccompaniment(selectedAccompaniment.getId());

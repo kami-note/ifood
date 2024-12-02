@@ -28,10 +28,8 @@ public class PaymentMethodScreen {
         } else {
             System.out.println(CLIUtils.color("Formas de pagamento cadastradas:", Ansi.Color.CYAN));
 
-            // Definir cabeçalhos da tabela
             String[] headers = {"ID", "Nome"};
 
-            // Converter a lista de formas de pagamento para linhas da tabela
             List<String[]> rows = paymentMethods.stream()
                     .map(paymentMethod -> new String[]{
                             String.valueOf(paymentMethod.getId()),
@@ -39,15 +37,12 @@ public class PaymentMethodScreen {
                     })
                     .toList();
 
-            // Criar a tabela e renderizar
             Table table = new Table(headers, rows);
             table.render();
 
-            // Adicionar uma opção para o usuário selecionar um método de pagamento
             InputField<Long> idField = new InputField<>("Digite o ID do método de pagamento a ser selecionado:", Long::parseLong, "ID inválido!");
             Long selectedId = idField.getUserInput();
 
-            // Buscar o método de pagamento pelo ID selecionado
             PaymentMethod selectedPaymentMethod = paymentMethodDAO.findById(selectedId);
             if (selectedPaymentMethod != null) {
                 globalInfos.setPaymentMethod(selectedPaymentMethod.getId());

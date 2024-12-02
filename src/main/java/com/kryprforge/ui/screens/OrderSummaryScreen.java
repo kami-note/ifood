@@ -26,11 +26,9 @@ public class OrderSummaryScreen {
     }
 
     public boolean render() {
-        // Cabeçalho
         Header header = new Header("Resumo do Pedido", 50);
         header.render();
 
-        // Recuperar IDs dos produtos selecionados
         List<Long> selectedProductIds = globalInfos.getSelectedProducts();
 
         if (selectedProductIds.isEmpty()) {
@@ -38,18 +36,15 @@ public class OrderSummaryScreen {
             return false;
         }
 
-        // Obter detalhes dos produtos selecionados
         List<Product> selectedProducts = selectedProductIds.stream()
                 .map(productDAO::findById)
                 .collect(Collectors.toList());
 
-        // Recuperar os IDs de adicionais e seus detalhes
         List<Long> selectedAccompanimentIds = globalInfos.getSelectedAccompaniments();
         List<Accompaniment> selectedAccompaniments = selectedAccompanimentIds.stream()
                 .map(accompanimentDAO::findById)
                 .collect(Collectors.toList());
 
-        // Exibir os produtos selecionados e calcular o total
         double totalPrice = 0;
         System.out.println(CLIUtils.color("Produtos selecionados:", Ansi.Color.CYAN));
         for (Product product : selectedProducts) {
@@ -57,7 +52,6 @@ public class OrderSummaryScreen {
             totalPrice += product.getPrice();
         }
 
-        // Exibir os adicionais e calcular o total
         if (!selectedAccompaniments.isEmpty()) {
             System.out.println(CLIUtils.color("\nAdicionais:", Ansi.Color.YELLOW));
             for (Accompaniment accompaniment : selectedAccompaniments) {
@@ -66,10 +60,8 @@ public class OrderSummaryScreen {
             }
         }
 
-        // Exibir o total
         System.out.println(CLIUtils.color("\nTotal do Pedido: $" + String.format("%.2f", totalPrice), Ansi.Color.GREEN));
 
-        // Menu de opções
         System.out.println("\n[1] Confirmar Pedido");
         System.out.println("[2] Cancelar Pedido");
 
